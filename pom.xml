@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.hm.digital.equipment</groupId>
+  <artifactId>hm-equipment</artifactId>
+  <version>1.0.0</version>
+  <name>hm-equipment</name>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.5.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+  <properties>
+    <java.version>1.8</java.version>
+    <spring-nacos.version>2.1.1.RELEASE</spring-nacos.version>
+    <hm-digital-twin.version>1.0.0</hm-digital-twin.version>
+    <icc.sdk.version>1.0.9</icc.sdk.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+      <version>2.1.1.RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>hm-common</groupId>
+      <artifactId>hm-common</artifactId>
+      <version>${hm-digital-twin.version}</version>
+    </dependency>
+
+    <!-- ICC鉴权 -->
+    <dependency>
+      <groupId>com.dahuatech.icc</groupId>
+      <artifactId>java-sdk-oauth</artifactId>
+      <version>${icc.sdk.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>java-sdk-core</artifactId>
+          <groupId>com.dahuatech.icc</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.dahuatech.icc</groupId>
+      <artifactId>java-sdk-core</artifactId>
+      <version>1.0.9</version>
+    </dependency>
+    <!-- ICC基础资源SDK -->
+    <dependency>
+      <groupId>com.dahuatech.icc</groupId>
+      <artifactId>java-sdk-brm</artifactId>
+      <version>${icc.sdk.version}</version>
+    </dependency>
+    <!-- ICC 事件中心sdk -->
+    <dependency>
+      <groupId>com.dahuatech.icc</groupId>
+      <artifactId>java-sdk-event</artifactId>
+      <version>${icc.sdk.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-openfeign-core</artifactId>
+      <version>2.2.1.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vaadin.external.google</groupId>
+      <artifactId>android-json</artifactId>
+      <version>0.0.20131108.vaadin1</version>
+      <scope>compile</scope>
+    </dependency>
+    <!--华为云-->
+    <dependency>
+      <groupId>com.huaweicloud.sdk</groupId>
+      <artifactId>huaweicloud-sdk-bundle</artifactId>
+      <version>[3.0.40-rc, 3.1.0)</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>hm-interface</groupId>
+      <artifactId>hm-interface</artifactId>
+      <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>
