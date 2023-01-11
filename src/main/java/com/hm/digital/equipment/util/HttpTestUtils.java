@@ -36,8 +36,8 @@ import org.apache.http.ssl.SSLContexts;
 import org.apache.http.ssl.TrustStrategy;
 
 import com.google.gson.Gson;
-import com.hm.digital.equipment.controller.dahua.dto.LoginFirst;
-import com.hm.digital.equipment.controller.dahua.dto.LoginSecond;
+import com.hm.digital.equipment.dahua.dto.LoginFirst;
+import com.hm.digital.equipment.dahua.dto.LoginSecond;
 
 public class HttpTestUtils {
 
