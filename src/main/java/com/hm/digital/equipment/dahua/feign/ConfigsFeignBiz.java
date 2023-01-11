@@ -16,6 +16,6 @@ public interface ConfigsFeignBiz {
   void save(@RequestBody Config config);
 
 
-  @RequestMapping("/configList")
+  @GetMapping("/configList")
   List<Config> configList(Config config);
 }
