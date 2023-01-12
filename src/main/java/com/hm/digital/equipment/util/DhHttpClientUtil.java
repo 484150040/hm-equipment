@@ -14,6 +14,7 @@ import com.dahuatech.icc.oauth.http.IClient;
 import com.dahuatech.icc.oauth.model.v202010.GeneralRequest;
 import com.dahuatech.icc.oauth.model.v202010.GeneralResponse;
 import com.hm.digital.common.enums.ConfigEnum;
+import com.hm.digital.equipment.dahua.feign.ConfigsFeignBiz;
 import com.hm.digital.inface.biz.ConfigsService;
 import com.hm.digital.inface.entity.Config;
 
@@ -30,12 +31,13 @@ public class DhHttpClientUtil {
   private static String clientSecret;
 
   @Autowired
-  public ConfigsService configsServices;
+  public ConfigsFeignBiz configsFeignBiz;
+
   @PostConstruct
   public void init() {
-    host = configsServices.getValue(getCofig(ConfigEnum.ICC_HOST.getKey())).get(0).getValue();
-    clientId = configsServices.getValue(getCofig(ConfigEnum.ICC_CLIENTID.getKey())).get(0).getValue();
-    clientSecret = configsServices.getValue(getCofig(ConfigEnum.ICC_CLIENTSECRET.getKey())).get(0).getValue();
+    host = configsFeignBiz.configList(getCofig(ConfigEnum.ICC_HOST.getKey())).get(0).getValue();
+    clientId = configsFeignBiz.configList(getCofig(ConfigEnum.ICC_CLIENTID.getKey())).get(0).getValue();
+    clientSecret = configsFeignBiz.configList(getCofig(ConfigEnum.ICC_CLIENTSECRET.getKey())).get(0).getValue();
   }
 
   private Config getCofig(String config) {
