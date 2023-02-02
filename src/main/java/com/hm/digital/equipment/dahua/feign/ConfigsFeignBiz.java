@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hm.digital.inface.entity.Config;
 
-@FeignClient(value = "nacos", path = "/digital")
+@FeignClient(value = "digital-nacos", path = "/digital")
 public interface ConfigsFeignBiz {
 
   @GetMapping(value = "/save")
   void save(@RequestBody Config config);
 
 
-  @GetMapping("/configList")
-  List<Config> configList(Config config);
+  @RequestMapping("/configList")
+  List<Config> configList(@RequestBody Config config);
 }

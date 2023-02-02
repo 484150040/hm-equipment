@@ -35,9 +35,15 @@ public class DhHttpClientUtil {
 
   @PostConstruct
   public void init() {
-    host = configsFeignBiz.configList(getCofig(ConfigEnum.ICC_HOST.getKey())).get(0).getValue();
-    clientId = configsFeignBiz.configList(getCofig(ConfigEnum.ICC_CLIENTID.getKey())).get(0).getValue();
-    clientSecret = configsFeignBiz.configList(getCofig(ConfigEnum.ICC_CLIENTSECRET.getKey())).get(0).getValue();
+    try {
+      host = configsFeignBiz.configList(getCofig(ConfigEnum.ICC_HOST.getKey())).get(0).getValue();
+      clientId = configsFeignBiz.configList(getCofig(ConfigEnum.ICC_CLIENTID.getKey())).get(0).getValue();
+      clientSecret = configsFeignBiz.configList(getCofig(ConfigEnum.ICC_CLIENTSECRET.getKey())).get(0).getValue();
+    } catch (Exception e) {
+      e.printStackTrace();
+      return;
+    }
+
   }
 
   private Config getCofig(String config) {

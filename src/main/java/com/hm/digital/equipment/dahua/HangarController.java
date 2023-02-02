@@ -37,13 +37,28 @@ public class HangarController {
   @PostConstruct
   public void init() {
    try {
-     host = configsFeignBiz.configList(getCofig(ConfigEnum.HANGAR.getKey())).get(0).getValue();
+     Config config1 = configsFeignBiz.configList(getCofig(ConfigEnum.HANGAR.getKey())).get(0);
+     if (config1.getStatus()<2){
+       config1.setStatus(2);
+       configsFeignBiz.save(config1);
+     }
+     host = config1.getValue();
      if (StringUtils.isEmpty(host)){
        return;
      }
      //登录
-     String username = configsFeignBiz.configList(getCofig(ConfigEnum.HANGAR_USERNAME.getKey())).get(0).getValue();
-     String password = configsFeignBiz.configList(getCofig(ConfigEnum.HANGAR_PASSWORD.getKey())).get(0).getValue();
+     Config configusername = configsFeignBiz.configList(getCofig(ConfigEnum.HANGAR_USERNAME.getKey())).get(0);
+     Config configpassword = configsFeignBiz.configList(getCofig(ConfigEnum.HANGAR_PASSWORD.getKey())).get(0);
+     if (configusername.getStatus()<2){
+       configusername.setStatus(2);
+       configsFeignBiz.save(configusername);
+     }
+     if (configpassword.getStatus()<2){
+       configpassword.setStatus(2);
+       configsFeignBiz.save(configpassword);
+     }
+     String username = configusername.getValue();
+     String password = configpassword.getValue();
      DroneVo droneVo = new DroneVo();
      droneVo.setMethod(MethodEnum.FN_LOGIN.getValue());
      droneVo.setParams(LoginDto.builder().username(username).password(password));
@@ -76,6 +91,7 @@ public class HangarController {
          Map<String, Object> dataMap = objectToMap(droneMqttmap.get("data"));
          Config config = getCofig(ConfigEnum.HANGAR_CONFIGURATION.getKey());
          config.setValue(String.valueOf(dataMap));
+         config.setStatus(2);
          Config configs = configsFeignBiz.configList(getCofig(ConfigEnum.HANGAR_CONFIGURATION.getKey())).get(0);
          if (configs!=null){
            return;

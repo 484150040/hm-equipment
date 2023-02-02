@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: digital
+    active: equipment
   application:
     name: equipment-nacos
   cloud:
